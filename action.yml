@@ -1,0 +1,15 @@
+name: 'HEMTT'
+description: 'Build project with HEMTT'
+author: 'HEMTT'
+branding:
+  icon: 'truck'  
+  color: 'green'
+inputs: 
+  command:
+    description: 'HEMTT command to execute'
+    default: 'build'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}

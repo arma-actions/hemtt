@@ -22,6 +22,8 @@ async function run(): Promise<void> {
           repo: 'HEMTT',
           tag
         })
+  core.info(`HEMTT Version: ${release.data.tag_name}`)
+  core.debug(`Release: ${JSON.stringify(release)}`)
   const assets = release.data.assets
   const asset = assets.find(a => {
     return a.name === (isWin ? 'windows-x64.zip' : 'linux-64.zip')

@@ -66,7 +66,8 @@ function run() {
         core.debug(`Release: ${JSON.stringify(release)}`);
         const assets = release.data.assets;
         const asset = assets.find(a => {
-            return a.name === (isWin ? 'windows-x64.zip' : 'linux-64.zip');
+            core.debug(`Asset: ${JSON.stringify(a)}`);
+            return a.name === (isWin ? 'windows-x64.zip' : 'linux-x64.zip');
         });
         if (asset === undefined) {
             core.setFailed(`Could not find ${isWin ? 'windows-x64.zip' : 'linux-x64.zip'} in release ${tag}`);

@@ -1,0 +1,13 @@
+name: 'HEMTT'
+description: 'Build project with HEMTT'
+author: 'HEMTT'
+branding:
+  icon: 'truck'  
+  color: 'green'
+inputs: 
+  version:
+    description: 'HEMTT Version'
+    default: 'latest'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

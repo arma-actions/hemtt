@@ -84,7 +84,7 @@ function run() {
             });
         });
         // extract the zip
-        yield (0, extract_zip_1.default)('hemtt.zip', { dir: 'hemtt' });
+        yield (0, extract_zip_1.default)('hemtt.zip', { dir: `${process.cwd()}/hemtt/` });
         // add to path
         core.addPath('hemtt');
         core.info('HEMTT added to path');

@@ -51,7 +51,7 @@ async function run(): Promise<void> {
 
   // extract the zip
 
-  await extract('hemtt.zip', {dir: 'hemtt'})
+  await extract('hemtt.zip', {dir: `${process.cwd()}/hemtt/`})
 
   // add to path
 

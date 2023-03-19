@@ -24,7 +24,7 @@ Specify a version of HEMTT to use:
 - uses: arma-actions/hemtt@v1
   name: Setup HEMTT
   with:
-    version: '1.2.0'
+    version: 'v1.2.0'
 ```
 
 

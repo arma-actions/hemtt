@@ -22,7 +22,7 @@ async function run(): Promise<void> {
     false,
     false
   )
-  core.addPath('hemtt')
+  core.addPath(`${process.cwd()}/hemtt`)
 }
 
 run()

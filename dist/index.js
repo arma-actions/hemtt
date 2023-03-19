@@ -54,7 +54,7 @@ function run() {
                 ? asset.name === 'windows-x64.zip'
                 : asset.name === 'linux-x64.zip';
         }, false, false);
-        core.addPath('hemtt');
+        core.addPath(`${process.cwd()}/hemtt`);
     });
 }
 run();

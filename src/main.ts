@@ -26,7 +26,7 @@ async function run(): Promise<void> {
   core.debug(`Release: ${JSON.stringify(release)}`)
   const assets = release.data.assets
   const asset = assets.find(a => {
-    return a.name === (isWin ? 'windows-x64.zip' : 'linux-64.zip')
+    return a.name === (isWin ? 'windows-x64.zip' : 'linux-x64.zip')
   })
   if (asset === undefined) {
     core.setFailed(

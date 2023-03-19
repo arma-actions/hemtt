@@ -45,7 +45,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const rest_1 = __nccwpck_require__(5375);
 const core = __importStar(__nccwpck_require__(2186));
 const fs = __importStar(__nccwpck_require__(7147));
-const http = __importStar(__nccwpck_require__(3685));
+const https = __importStar(__nccwpck_require__(5687));
 const extract_zip_1 = __importDefault(__nccwpck_require__(460));
 const isWin = process.platform === 'win32';
 const octokit = new rest_1.Octokit();
@@ -76,7 +76,7 @@ function run() {
         core.info(`Downloading ${asset.name} from ${asset.browser_download_url}`);
         // download the zip
         const file = fs.createWriteStream('hemtt.zip');
-        http.get(asset.browser_download_url, response => {
+        https.get(asset.browser_download_url, response => {
             response.pipe(file);
             file.on('finish', () => {
                 file.close();

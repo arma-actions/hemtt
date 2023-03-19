@@ -1,7 +1,7 @@
 import {Octokit} from '@octokit/rest'
 import * as core from '@actions/core'
 import * as fs from 'fs'
-import * as http from 'http'
+import * as https from 'https'
 import extract from 'extract-zip'
 
 const isWin = process.platform === 'win32'
@@ -41,7 +41,7 @@ async function run(): Promise<void> {
   // download the zip
 
   const file = fs.createWriteStream('hemtt.zip')
-  http.get(asset.browser_download_url, response => {
+  https.get(asset.browser_download_url, response => {
     response.pipe(file)
     file.on('finish', () => {
       file.close()

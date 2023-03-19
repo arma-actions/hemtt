@@ -24,7 +24,15 @@ async function run(): Promise<void> {
     false
   )
   if (!isWin) {
-    await exec('chmod +x hemtt/hemtt')
+    exec('chmod +x hemtt/hemtt', (error, stdout, stderr) => {
+      if (error) {
+        core.setFailed(error.message)
+      }
+      if (stderr) {
+        core.setFailed(stderr)
+      }
+      core.info(stdout)
+    })
   }
   core.addPath(`${process.cwd()}/hemtt`)
 }

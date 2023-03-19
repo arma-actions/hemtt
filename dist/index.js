@@ -41,6 +41,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const fetch_github_release_1 = __nccwpck_require__(4676);
+const child_process_1 = __nccwpck_require__(2081);
 const isWin = process.platform === 'win32';
 const tag = core.getInput('version', { trimWhitespace: true });
 function run() {
@@ -54,6 +55,17 @@ function run() {
                 ? asset.name === 'windows-x64.zip'
                 : asset.name === 'linux-x64.zip';
         }, false, false);
+        if (!isWin) {
+            (0, child_process_1.exec)('chmod +x hemtt/hemtt', (error, stdout, stderr) => {
+                if (error) {
+                    core.setFailed(error.message);
+                }
+                if (stderr) {
+                    core.setFailed(stderr);
+                }
+                core.info(stdout);
+            });
+        }
         core.addPath(`${process.cwd()}/hemtt`);
     });
 }
@@ -13928,6 +13940,14 @@ module.exports = require("assert");
 
 "use strict";
 module.exports = require("buffer");
+
+/***/ }),
+
+/***/ 2081:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("child_process");
 
 /***/ }),
 

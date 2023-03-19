@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import {downloadRelease} from '@terascope/fetch-github-release'
+import {exec} from 'child_process'
 
 const isWin = process.platform === 'win32'
 
@@ -22,6 +23,9 @@ async function run(): Promise<void> {
     false,
     false
   )
+  if (!isWin) {
+    await exec('chmod +x hemtt/hemtt')
+  }
   core.addPath(`${process.cwd()}/hemtt`)
 }
 

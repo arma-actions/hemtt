@@ -11,6 +11,7 @@ async function run(): Promise<void> {
     'HEMTT',
     'hemtt',
     release => {
+      if (tag === 'latest') return release.prerelease === false
       return release.tag_name === tag
     },
     asset => {

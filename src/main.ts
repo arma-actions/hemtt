@@ -43,20 +43,19 @@ async function run(): Promise<void> {
   const file = fs.createWriteStream('hemtt.zip')
   https.get(asset.browser_download_url, response => {
     response.pipe(file)
-    file.on('finish', () => {
+    file.on('finish', async () => {
       file.close()
       core.info('Download Completed')
+
+      // extract the zip
+      await extract('hemtt.zip', {dir: `${process.cwd()}/hemtt/`})
+
+      // add to path
+
+      core.addPath('hemtt')
+      core.info('HEMTT added to path')
     })
   })
-
-  // extract the zip
-
-  await extract('hemtt.zip', {dir: `${process.cwd()}/hemtt/`})
-
-  // add to path
-
-  core.addPath('hemtt')
-  core.info('HEMTT added to path')
 }
 
 run()

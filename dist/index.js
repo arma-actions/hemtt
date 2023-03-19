@@ -78,16 +78,16 @@ function run() {
         const file = fs.createWriteStream('hemtt.zip');
         https.get(asset.browser_download_url, response => {
             response.pipe(file);
-            file.on('finish', () => {
+            file.on('finish', () => __awaiter(this, void 0, void 0, function* () {
                 file.close();
                 core.info('Download Completed');
-            });
+                // extract the zip
+                yield (0, extract_zip_1.default)('hemtt.zip', { dir: `${process.cwd()}/hemtt/` });
+                // add to path
+                core.addPath('hemtt');
+                core.info('HEMTT added to path');
+            }));
         });
-        // extract the zip
-        yield (0, extract_zip_1.default)('hemtt.zip', { dir: `${process.cwd()}/hemtt/` });
-        // add to path
-        core.addPath('hemtt');
-        core.info('HEMTT added to path');
     });
 }
 run();

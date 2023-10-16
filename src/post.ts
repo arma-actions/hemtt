@@ -1,17 +1,18 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
 
-const annotate: boolean =
-  core.getInput('annotate') === 'true'
+const annotate: boolean = core.getInput('annotate') === 'true'
+
+const file = '.hemttout/ci_annotation.txt'
 
 function run(): void {
   if (!annotate) return
   core.info('Annotating build')
-  if (!fs.existsSync('.hemttout/ci_annotations.txt')) {
+  if (!fs.existsSync(file)) {
     core.info('No annotations file found')
     return
   }
-  const data = fs.readFileSync('.hemttout/ci_annotations.txt', 'utf8')
+  const data = fs.readFileSync(file, 'utf8')
   const lines = data.split('\n')
   const annotations = lines.filter(line => line.length > 0).map(parseAnnotation)
   for (const annotation of annotations) {

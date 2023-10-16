@@ -43,7 +43,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const fetch_github_release_1 = __nccwpck_require__(4676);
 const child_process_1 = __nccwpck_require__(2081);
 const isWin = process.platform === 'win32';
-const tag = core.getInput('version', { trimWhitespace: true });
+const tag = core.getInput('version');
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         yield (0, fetch_github_release_1.downloadRelease)('BrettMayson', 'HEMTT', 'hemtt', release => {

@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
 
-const annotate: boolean = core.getInput('annotate') === 'true'
+const annotate: boolean = core.getInput('annotate') !== 'false'
 
 const file = '.hemttout/ci_annotation.txt'
 

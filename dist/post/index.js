@@ -25626,7 +25626,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const fs = __importStar(__nccwpck_require__(7147));
-const annotate = core.getInput('annotate') === 'true';
+const annotate = core.getInput('annotate') !== 'false';
 const file = '.hemttout/ci_annotation.txt';
 function run() {
     if (!annotate)

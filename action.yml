@@ -8,6 +8,11 @@ inputs:
   version:
     description: 'HEMTT Version'
     default: 'latest'
+  annotate:
+    description: 'Annotate output'
+    default: 'true'
 runs:
   using: 'node20'
-  main: 'dist/index.js'
+  main: 'dist/main/index.js'
+  post: 'dist/post/index.js'
+  post-if: 'always()'

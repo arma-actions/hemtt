@@ -4,7 +4,7 @@ import {exec} from 'child_process'
 
 const isWin = process.platform === 'win32'
 
-const tag: string = core.getInput('version', {trimWhitespace: true})
+const tag: string = core.getInput('version')
 
 async function run(): Promise<void> {
   await downloadRelease(

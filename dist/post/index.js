@@ -25627,18 +25627,19 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const fs = __importStar(__nccwpck_require__(7147));
 const annotate = core.getInput('annotate') !== 'false';
-const file = '.hemttout/ci_annotation.txt';
+const file = '.hemttout/ci_annotations.txt';
 function run() {
     if (!annotate)
         return;
-    core.info('Annotating build');
+    core.info('Annotating build.');
     if (!fs.existsSync(file)) {
-        core.info('No annotations file found');
+        core.info('No annotations file found.');
         return;
     }
     const data = fs.readFileSync(file, 'utf8');
     const lines = data.split('\n');
     const annotations = lines.filter(line => line.length > 0).map(parseAnnotation);
+    core.info(`Found ${annotations.length} annotations.`);
     for (const annotation of annotations) {
         switch (annotation.level) {
             case 'error':

@@ -3,7 +3,7 @@ import * as fs from 'fs'
 
 const annotate: boolean = core.getInput('annotate') !== 'false'
 
-const file = '.hemttout/ci_annotation.txt'
+const file = '.hemttout/ci_annotations.txt'
 
 function run(): void {
   if (!annotate) return

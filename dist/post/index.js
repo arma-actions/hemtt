@@ -31184,7 +31184,7 @@ function getIDToken(aud) {
 ;// CONCATENATED MODULE: ./src/post.ts
 
 
-const annotate = getInput('annotate') !== 'false';
+const annotate = getBooleanInput('annotate');
 const file = '.hemttout/ci_annotations.txt';
 function run() {
     if (!annotate)

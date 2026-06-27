@@ -39239,11 +39239,10 @@ const dist_src_Octokit = Octokit.plugin(requestLog, legacyRestEndpointMethods, p
 
 
 
-
 const isWin = process.platform === 'win32';
-async function downloadAndExtractRelease(owner, repo, tag, assetName, destDir, authToken = '') {
-    const octokit = new dist_src_Octokit({ auth: authToken });
-    info(`Listing releases for ${owner}/${repo}`);
+async function downloadAndExtractRelease(owner, repo, tag, assetName, destDir, authToken) {
+    const octokit = new dist_src_Octokit(authToken ? { auth: authToken } : {});
+    core_debug(`Listing releases for ${owner}/${repo}`);
     const releasesResp = await octokit.rest.repos.listReleases({
         owner,
         repo,
@@ -39294,14 +39293,14 @@ async function run() {
             // Adjust path to the binary as needed (here we assume hemtt/hemtt inside the zip)
             const binPath = external_path_namespaceObject.join(hemttDir, 'hemtt');
             if (external_fs_namespaceObject.existsSync(binPath)) {
-                (0,external_child_process_namespaceObject.execSync)(`chmod +x ${binPath}`);
+                external_fs_namespaceObject.chmodSync(binPath, 0o755);
             }
             else {
                 warning(`Expected binary not found at ${binPath}; skipping chmod.`);
             }
         }
         const hemttPath = toPlatformPath(hemttDir);
-        info(`Adding ${hemttPath} to Github system path.`);
+        info(`Adding ${hemttPath} to GitHub system path.`);
         addPath(hemttPath);
         info('Done.');
     }

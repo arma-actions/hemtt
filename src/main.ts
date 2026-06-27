@@ -5,7 +5,6 @@ import * as tc from '@actions/tool-cache'
 // eslint-disable-next-line import/no-unresolved
 import {Octokit} from '@octokit/rest'
 import type {Endpoints} from '@octokit/types'
-import {execSync} from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -23,10 +22,10 @@ async function downloadAndExtractRelease(
   tag: string,
   assetName: string,
   destDir: string,
-  authToken = ''
+  authToken?: string
 ): Promise<string> {
-  const octokit = new Octokit({auth: authToken})
-  core.info(`Listing releases for ${owner}/${repo}`)
+  const octokit = new Octokit(authToken ? {auth: authToken} : {})
+  core.debug(`Listing releases for ${owner}/${repo}`)
   const releasesResp = await octokit.rest.repos.listReleases({
     owner,
     repo,
@@ -102,14 +101,14 @@ async function run(): Promise<void> {
       // Adjust path to the binary as needed (here we assume hemtt/hemtt inside the zip)
       const binPath = path.join(hemttDir, 'hemtt')
       if (fs.existsSync(binPath)) {
-        execSync(`chmod +x ${binPath}`)
+        fs.chmodSync(binPath, 0o755)
       } else {
         core.warning(`Expected binary not found at ${binPath}; skipping chmod.`)
       }
     }
 
     const hemttPath = core.toPlatformPath(hemttDir)
-    core.info(`Adding ${hemttPath} to Github system path.`)
+    core.info(`Adding ${hemttPath} to GitHub system path.`)
     core.addPath(hemttPath)
     core.info('Done.')
   } catch (error) {
